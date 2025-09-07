@@ -16,9 +16,8 @@ import be.hogent.tarsos.dsp.AudioEvent;
 import be.hogent.tarsos.dsp.AudioProcessor;
 import be.hogent.tarsos.dsp.MicrophoneAudioDispatcher;
 import be.hogent.tarsos.dsp.SilenceDetector;
-import be.hogent.tarsos.dsp.pitch.PitchDetectionAlgorithm;
+import be.hogent.tarsos.dsp.pitch.PitchDetectionHandler;
 import be.hogent.tarsos.dsp.pitch.PitchDetectionResult;
-import be.hogent.tarsos.dsp.pitch.PitchDetector;
 import be.hogent.tarsos.dsp.pitch.PitchProcessor;
 
 public class MainActivity extends AppCompatActivity {
@@ -104,35 +103,25 @@ public class MainActivity extends AppCompatActivity {
             
             dispatcher = new MicrophoneAudioDispatcher(22050, 1024, 512);
             
-            PitchDetectionAlgorithm algorithm = PitchDetectionAlgorithm.YIN;
-            PitchProcessor pitchProcessor = new PitchProcessor(algorithm, 22050, 1024, new PitchDetector() {
+            PitchProcessor.PitchEstimationAlgorithm algorithm = PitchProcessor.PitchEstimationAlgorithm.YIN;
+            PitchProcessor pitchProcessor = new PitchProcessor(algorithm, 22050, 1024, new PitchDetectionHandler() {
                 @Override
-                public PitchDetectionResult getPitch(float[] audioBuffer) {
-                    // This is handled by the PitchProcessor
-                    return null;
-                }
-            }) {
-                @Override
-                public boolean process(AudioEvent audioEvent) {
-                    PitchDetectionResult pitchResult = super.getPitchDetectionResult();
-                    if (pitchResult != null) {
-                        final float pitchInHz = pitchResult.getPitch();
-                        final float probability = pitchResult.getProbability();
-                        
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                if (pitchInHz > 0 && probability > 0.9) {
-                                    pitchResultText.setText(String.format("Pitch: %.2f Hz (%.1f%% confidence)", pitchInHz, probability * 100));
-                                } else {
-                                    pitchResultText.setText(getString(R.string.no_pitch_detected));
-                                }
+                public void handlePitch(PitchDetectionResult pitchDetectionResult, AudioEvent audioEvent) {
+                    final float pitchInHz = pitchDetectionResult.getPitch();
+                    final float probability = pitchDetectionResult.getProbability();
+                    
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (pitchInHz > 0 && probability > 0.9) {
+                                pitchResultText.setText(String.format("Pitch: %.2f Hz (%.1f%% confidence)", pitchInHz, probability * 100));
+                            } else {
+                                pitchResultText.setText(getString(R.string.no_pitch_detected));
                             }
-                        });
-                    }
-                    return true;
+                        }
+                    });
                 }
-            };
+            });
 
             dispatcher.addAudioProcessor(pitchProcessor);
             
