@@ -1,5 +1,6 @@
 plugins {
     id 'java-library'
+    id 'application'
     id 'maven-publish'
 }
 
@@ -50,9 +51,14 @@ tasks.jar {
                 'Implementation-Title': 'TarsosDSP',
                 'Implementation-Version': project.version,
                 'Built-By': System.properties['user.name'],
-                'Built-Date': new java.text.SimpleDateFormat('yyyy-MM-dd').format(new Date())
+                'Built-Date': new java.text.SimpleDateFormat('yyyy-MM-dd').format(new Date()),
+                'Main-Class': 'be.hogent.tarsos.dsp.app.PitchDetectCli'
         )
     }
+}
+
+application {
+    mainClass = 'be.hogent.tarsos.dsp.app.PitchDetectCli'
 }
 
 tasks.test {
