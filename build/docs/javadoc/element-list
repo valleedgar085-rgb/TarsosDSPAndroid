@@ -1,0 +1,12 @@
+be.hogent.tarsos.dsp
+be.hogent.tarsos.dsp.app
+be.hogent.tarsos.dsp.beatroot
+be.hogent.tarsos.dsp.effects
+be.hogent.tarsos.dsp.filters
+be.hogent.tarsos.dsp.mfcc
+be.hogent.tarsos.dsp.onsets
+be.hogent.tarsos.dsp.pitch
+be.hogent.tarsos.dsp.resample
+be.hogent.tarsos.dsp.synthesis
+be.hogent.tarsos.dsp.util
+be.hogent.tarsos.dsp.util.fft
