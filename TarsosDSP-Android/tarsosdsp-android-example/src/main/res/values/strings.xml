@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">TarsosDSP Android Example</string>
+    <string name="pitch_detector_title">Pitch Detector</string>
+    <string name="start_listening">Start Listening</string>
+    <string name="stop_listening">Stop Listening</string>
+    <string name="detected_pitch">Detected Pitch</string>
+    <string name="no_pitch">---</string>
+    <string name="frequency_label">Frequency:</string>
+    <string name="note_label">Note:</string>
+    <string name="probability_label">Probability:</string>
+    <string name="permission_required">Microphone permission is required</string>
+    <string name="grant_permission">Grant Permission</string>
+</resources>

@@ -1,0 +1,3 @@
+rootProject.name = 'TarsosDSP-Android'
+include ':tarsosdsp-android'
+include ':tarsosdsp-android-example'
