@@ -1,0 +1,61 @@
+TarsosDSP-Android License
+=========================
+
+TarsosDSP-Android is based on TarsosDSP by Joren Six and maintains 
+compatibility with the original library's licensing.
+
+The library is provided under the GNU General Public License (GPL) version 3.0
+or any later version, with the following clarifications:
+
+1. You are free to use TarsosDSP-Android in commercial applications
+2. If you modify the library, you must make your modifications available
+3. Applications using the library don't need to be open source
+4. The library itself must remain under the GPL
+
+For the full GPL v3 license text, see: https://www.gnu.org/licenses/gpl-3.0.html
+
+---
+
+TarsosDSP Original Credits
+==========================
+
+TarsosDSP was developed by Joren Six at University College Ghent, School of Arts,
+and later supported by University Ghent, IPEM.
+
+The library incorporates algorithms from various sources:
+
+- YIN: Alain de Cheveigné and Hideki Kawahara
+- MPM: Philip McLeod and Geoff Wyvill  
+- WSOLA: Werner Verhelst and Marc Roelands
+- FFT: Piotr Wendykier (JTransforms)
+- Resampling: Laszlo systems (libresample4j)
+- Onset Detection: Chris Cannam (VAMP)
+- Beat Detection: Simon Dixon (BeatRoot)
+- And many other contributors
+
+For detailed credits, see the original TarsosDSP repository.
+
+---
+
+Android Port
+============
+
+The Android port adds Android-specific implementations using:
+- Android AudioRecord API
+- Android AudioTrack API
+- Android-specific utility classes
+
+These additions are provided under the same GPL v3 license.
+
+Copyright (c) 2024 TarsosDSP-Android Contributors
+Copyright (c) 2012-2023 Joren Six (Original TarsosDSP)
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
