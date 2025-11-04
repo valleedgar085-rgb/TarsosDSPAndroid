@@ -1,0 +1,87 @@
+plugins {
+    id 'java-library'
+    id 'maven-publish'
+}
+
+group = 'be.hogent.tarsos'
+version = '1.7.0'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+    withJavadocJar()
+    withSourcesJar()
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compileOnly 'com.google.android:android:4.1.1.4'
+    testImplementation 'junit:junit:4.13.2'
+}
+
+def includeLegacyTests = project.hasProperty('includeLegacyTests')
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src']
+        }
+    }
+    test {
+        java {
+            srcDirs = ['tests']
+        }
+        resources {
+            srcDirs = ['tests/be/hogent/tarsos/dsp/test/resources']
+        }
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+
+tasks.jar {
+    manifest {
+        attributes(
+                'Implementation-Title': 'TarsosDSP',
+                'Implementation-Version': project.version,
+                'Built-By': System.properties['user.name'],
+                'Built-Date': new java.text.SimpleDateFormat('yyyy-MM-dd').format(new Date())
+        )
+    }
+}
+
+tasks.test {
+    useJUnit()
+    enabled = includeLegacyTests
+}
+
+tasks.javadoc {
+    options.encoding = 'UTF-8'
+    options.addBooleanOption('Xdoclint:none', true)
+    failOnError = false
+}
+
+tasks.named('compileTestJava') {
+    enabled = includeLegacyTests
+}
+
+tasks.named('processTestResources') {
+    enabled = includeLegacyTests
+}
+
+tasks.named('testClasses') {
+    enabled = includeLegacyTests
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
+}
